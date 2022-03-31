@@ -1,4 +1,4 @@
-# NurseMasterDegreeProject
+# Master Degree project
 Nursing Project for a Master Degree Project in UNB (Universidade de Brasília)
 
 
