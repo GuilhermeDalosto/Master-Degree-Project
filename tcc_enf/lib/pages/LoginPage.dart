@@ -68,10 +68,15 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-              child: RaisedButton(
-                padding: const EdgeInsets.all(0),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
+              child: ElevatedButton(
+                // padding: const EdgeInsets.all(0),
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(80.0)),
+                style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)))),
                 onPressed: () {
                   if (this.nameFieldController.text == "admin" &&
                       this.passwordFieldController.text == "admin") {

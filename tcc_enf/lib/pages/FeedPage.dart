@@ -42,7 +42,7 @@ class _InstaListState extends State<InstaList> {
                               shape: BoxShape.circle,
                               image: new DecorationImage(
                                   fit: BoxFit.fill,
-                                  image: new AssetImage('res/player3.png'))),
+                                  image: new AssetImage('res/player4.jpeg'))),
                         )),
                     new SizedBox(
                       width: 10.0,
@@ -121,7 +121,7 @@ class _InstaListState extends State<InstaList> {
                       shape: BoxShape.circle,
                       image: new DecorationImage(
                           fit: BoxFit.fill,
-                          image: new AssetImage('res/player3.png'))),
+                          image: new AssetImage('res/player4.jpeg'))),
                 ),
                 new SizedBox(
                   width: 10.0,

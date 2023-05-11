@@ -45,6 +45,8 @@ class _TinderPageState extends State<TinderPage> {
       list.add(CardGame(name: names[position], image: "${images[position]}$i"));
     }
 
+    list.shuffle();
+
     return list;
   }
 
@@ -86,20 +88,22 @@ class _TinderPageState extends State<TinderPage> {
               })),
       actions: [
         Transform.scale(
-            scale: 1.6,
-            child: Row(children: [
-              Icon(Icons.close, color: Colors.red),
-              Text("$incorretas", style: TextStyle(color: Colors.red)),
-              SizedBox(width: 30)
-            ]))
-      ],
-      leading: Transform.scale(
           scale: 1.6,
-          child: Row(children: [
-            SizedBox(width: 15),
+          child: Row(children: [            
             Icon(Icons.done_rounded, color: Colors.green),
             Text("$corretas", style: TextStyle(color: Colors.green)),
-          ])));
+            SizedBox(width: 15),
+          ]))
+      ],
+      leading: 
+      Transform.scale(
+            scale: 1.6,
+            child: Row(children: [
+              SizedBox(width: 15),
+              Icon(Icons.close, color: Colors.red),
+              Text("$incorretas", style: TextStyle(color: Colors.red)),              
+            ]))
+            );
 
   Widget buildUser(CardGame user) {
     final userIndex = cards.indexOf(user);
@@ -141,13 +145,19 @@ class _TinderPageState extends State<TinderPage> {
       user.isLiked = true;
     }
 
-    if (Random().nextBool()) {
+    var number = user.image.replaceAll(RegExp(r'[^0-9]'), '');
+    var cardAnswer = int.parse(number) % 2 == 0;
+
+    if ((cardAnswer == true && user.isLiked) ||
+        (cardAnswer == false && user.isSwipedOff)) {
       corretas += 1;
       player.play('correct.mp3');
     } else {
       incorretas += 1;
       player.play('wrong.mp3');
     }
+    print(user.image);
+    print(number);
 
     setState(() => cards.remove(user));
   }

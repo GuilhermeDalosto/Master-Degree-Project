@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tcc_enf/Model/Tabs.dart';
 import 'RankingPage.dart';
 import 'FeedPage.dart';
+// import 'InfoPage.dart';
 import 'MenuGamePage.dart';
 
 class TabBarPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class TabBarController extends State<TabBarPage> with TickerProviderStateMixin {
     new BarTab(title: "Jogo", color: Colors.deepPurple[200]!),
     new BarTab(title: "Dicas", color: Colors.blue[200]!),
     new BarTab(title: "Ranking", color: Colors.teal[200]!),
+    new BarTab(title: "Informações", color: Colors.blue[200]!),
   ];
 
   BarTab _titleHandler = new BarTab(title: "", color: Colors.white);
@@ -27,7 +29,7 @@ class TabBarController extends State<TabBarPage> with TickerProviderStateMixin {
 
   void initState() {
     super.initState();
-    _controller = new TabController(length: 3, vsync: this);
+    _controller = new TabController(length: 4, vsync: this);
     _titleHandler = _tabs[0];
     _controller.addListener(_handleSelected);
   }
@@ -42,16 +44,17 @@ class TabBarController extends State<TabBarPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: _titleHandler.color,
             bottom: TabBar(
               controller: _controller,
               tabs: [
-                Tab(icon: Icon(Icons.info)),
+                Tab(icon: Icon(Icons.games)),
                 Tab(icon: Icon(Icons.feed)),                
-                Tab(icon: Icon(Icons.people)),                
+                Tab(icon: Icon(Icons.people)),
+                Tab(icon: Icon(Icons.info)),                
               ],
             ),
             title: Text(_titleHandler.title),
@@ -59,10 +62,10 @@ class TabBarController extends State<TabBarPage> with TickerProviderStateMixin {
           body: TabBarView(
             controller: _controller,
             children: [
-              MenuGamePage(),
-              // GamePage(),
+              MenuGamePage(),              
               InstaList(),
-              RankingPage(),              
+              RankingPage(),
+              MenuGamePage()              
             ],
           ),
         ),

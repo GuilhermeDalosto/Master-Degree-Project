@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "adivinhe-enfermagem",
+    "staging": "adivinhe-enfermagem"
+  },
+  "targets": {},
+  "etags": {}
+}
