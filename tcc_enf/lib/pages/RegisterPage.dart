@@ -4,6 +4,9 @@ import 'Background.dart';
 import 'TabController.dart';
 
 class RegisterPage extends StatelessWidget {
+  final nameFieldController = TextEditingController();
+  final passwordFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,6 +33,7 @@ class RegisterPage extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
+                controller: nameFieldController,
                 decoration: InputDecoration(labelText: "Nome"),
               ),
             ),
@@ -54,6 +58,7 @@ class RegisterPage extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
+                controller: passwordFieldController,
                 decoration: InputDecoration(labelText: "Senha"),
                 obscureText: true,
               ),
@@ -72,11 +77,14 @@ class RegisterPage extends StatelessWidget {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0)))),
                 onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => TabBarPage()),
-                    (Route<dynamic> route) => false,
-                  );
+                  if (this.nameFieldController.text.isEmpty == false &&
+                      this.passwordFieldController.text.isEmpty == false) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => TabBarPage()),
+                      (Route<dynamic> route) => false,
+                    );
+                  }
                 },
                 child: Container(
                   alignment: Alignment.center,

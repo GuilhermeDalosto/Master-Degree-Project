@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0)))),
                 onPressed: () {
-                  if (this.nameFieldController.text == "admin" &&
+                  if ((this.nameFieldController.text == "admin" || this.nameFieldController.text == "alinefarias" || this.nameFieldController.text == "yuribarbalho" || this.nameFieldController.text == "silvana") &&
                       this.passwordFieldController.text == "admin") {
                     Navigator.pushAndRemoveUntil(
                       context,

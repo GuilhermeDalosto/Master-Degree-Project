@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tcc_enf/Model/Tabs.dart';
 import 'RankingPage.dart';
 import 'FeedPage.dart';
-// import 'InfoPage.dart';
+import 'CreditsPage.dart';
 import 'MenuGamePage.dart';
 
 class TabBarPage extends StatefulWidget {
@@ -65,7 +65,7 @@ class TabBarController extends State<TabBarPage> with TickerProviderStateMixin {
               MenuGamePage(),              
               InstaList(),
               RankingPage(),
-              MenuGamePage()              
+              CreditsPage()              
             ],
           ),
         ),

@@ -36,12 +36,12 @@ class _TinderPageState extends State<TinderPage> {
       "abdomen",
       "cabeca",
       "cardiaco",
-      "pele",
+      "pele", 
       "respiratorio",
       "neuro"
     ];
 
-    for (int i = 1; i <= 39; i++) {
+    for (int i = 1; i <= 10; i++) {
       list.add(CardGame(name: names[position], image: "${images[position]}$i"));
     }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1023389496197",
+    "project_id": "enfermagem-adivinhe",
+    "storage_bucket": "enfermagem-adivinhe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023389496197:android:869793a079eb8fb3034aec",
+        "android_client_info": {
+          "package_name": "com.example.tcc_enf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023389496197-k5g1v67clmg4h5pu981m0uku8gki5hbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeV6238Ipy2YtDPkuUO49Wcg4W67W_-aI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023389496197-k5g1v67clmg4h5pu981m0uku8gki5hbk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
