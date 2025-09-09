@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_enf/Model/Card.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import '../pages/TinderComponent/FeedbackPositionProvider.dart';
 import '../pages/TinderComponent/UserCard.dart';
@@ -17,10 +17,18 @@ class TinderPage extends StatefulWidget {
 
 class _TinderPageState extends State<TinderPage> {
   List<CardGame> cards = getCards(0);
-  static AudioCache player = AudioCache();
 
   var corretas = 0;
   var incorretas = 0;
+
+  // Player de áudio usando just_audio
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
 
   static List<CardGame> getCards(int position) {
     List<CardGame> list = [];
@@ -36,7 +44,7 @@ class _TinderPageState extends State<TinderPage> {
       "abdomen",
       "cabeca",
       "cardiaco",
-      "pele", 
+      "pele",
       "respiratorio",
       "neuro"
     ];
@@ -46,8 +54,17 @@ class _TinderPageState extends State<TinderPage> {
     }
 
     list.shuffle();
-
     return list;
+  }
+
+  Future<void> playCorrect() async {
+    await _audioPlayer.setAsset('assets/correct.mp3');
+    _audioPlayer.play();
+  }
+
+  Future<void> playWrong() async {
+    await _audioPlayer.setAsset('assets/wrong.mp3');
+    _audioPlayer.play();
   }
 
   @override
@@ -60,50 +77,52 @@ class _TinderPageState extends State<TinderPage> {
               cards.isEmpty
                   ? const Text('No more cards')
                   : Stack(children: cards.map(buildUser).toList()),
-              Expanded(child: Container()),
+              const Expanded(child: SizedBox()),
               CategoryButtonsWidget(
                   callback: (value) =>
                       setState(() => this.cards = getCards(value))),
-              SizedBox(height: 50),
-              // BottomButtonsWidget()
+              const SizedBox(height: 50),
             ],
           ),
         ),
       );
 
   PreferredSizeWidget buildAppBar() => AppBar(
-      centerTitle: true,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      title: Transform.scale(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Transform.scale(
           scale: 1.3,
           child: IconButton(
-              icon: new Icon(Icons.house, color: Colors.purple),
-              onPressed: () {
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                } else {
-                  SystemNavigator.pop();
-                }
-              })),
-      actions: [
-        Transform.scale(
-          scale: 1.6,
-          child: Row(children: [            
-            Icon(Icons.done_rounded, color: Colors.green),
-            Text("$corretas", style: TextStyle(color: Colors.green)),
-            SizedBox(width: 15),
-          ]))
-      ],
-      leading: 
-      Transform.scale(
+            icon: const Icon(Icons.house, color: Colors.purple),
+            onPressed: () {
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context);
+              } else {
+                SystemNavigator.pop();
+              }
+            },
+          ),
+        ),
+        actions: [
+          Transform.scale(
             scale: 1.6,
             child: Row(children: [
-              SizedBox(width: 15),
-              Icon(Icons.close, color: Colors.red),
-              Text("$incorretas", style: TextStyle(color: Colors.red)),              
-            ]))
-            );
+              const Icon(Icons.done_rounded, color: Colors.green),
+              Text("$corretas", style: const TextStyle(color: Colors.green)),
+              const SizedBox(width: 15),
+            ]),
+          )
+        ],
+        leading: Transform.scale(
+          scale: 1.6,
+          child: Row(children: [
+            const SizedBox(width: 15),
+            const Icon(Icons.close, color: Colors.red),
+            Text("$incorretas", style: const TextStyle(color: Colors.red)),
+          ]),
+        ),
+      );
 
   Widget buildUser(CardGame user) {
     final userIndex = cards.indexOf(user);
@@ -137,8 +156,8 @@ class _TinderPageState extends State<TinderPage> {
     );
   }
 
-  void onDragEnd(DraggableDetails details, CardGame user) {
-    final minimumDrag = 100;
+  void onDragEnd(DraggableDetails details, CardGame user) async {
+    const minimumDrag = 100;
     if (details.offset.dx > minimumDrag) {
       user.isSwipedOff = true;
     } else if (details.offset.dx < -minimumDrag) {
@@ -151,13 +170,11 @@ class _TinderPageState extends State<TinderPage> {
     if ((cardAnswer == true && user.isLiked) ||
         (cardAnswer == false && user.isSwipedOff)) {
       corretas += 1;
-      player.play('correct.mp3');
+      await playCorrect();
     } else {
       incorretas += 1;
-      player.play('wrong.mp3');
+      await playWrong();
     }
-    print(user.image);
-    print(number);
 
     setState(() => cards.remove(user));
   }

@@ -1,8 +1,8 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 import 'package:tcc_enf/Model/User.dart';
 
 class RankingPage extends StatefulWidget {
-  RankingPage({Key? key}) : super(key: key);
+  const RankingPage({Key? key}) : super(key: key);
 
   @override
   _RankingPageState createState() => _RankingPageState();
@@ -14,38 +14,78 @@ class _RankingPageState extends State<RankingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(children: [
-      // new Container(
-      //   padding: EdgeInsets.all(5),
-      //     child: new Image.asset('res/rankingHeadline.png')
-      //     ),
-
-      ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-          itemCount: users.length,
-          itemBuilder: (BuildContext context, int index) {
-            var guest = users[index];
-            return Container(
-                color: index % 2 != 0
-                    ? Color.fromRGBO(255, 255, 255, 1)
-                    : Color.fromRGBO(169, 196, 164, 1),
-                child: ListTile(
-                  contentPadding: EdgeInsets.only(top: 15, left: 10),
-                  leading: new Container(
-                      width: 60.0,
-                      height: 190.0,
-                      decoration: new BoxDecoration(
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(5),
+            child: Image.asset(
+              'res/rankingHeadline.png',
+              fit: BoxFit
+                  .fitWidth, // Stretch to full width, maintain aspect ratio
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (BuildContext context, int index) {
+                var guest = users[index];
+                return Container(
+                  color: index % 2 != 0
+                      ? Colors.white
+                      : Color.fromRGBO(169, 196, 164, 1),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Imagem do usuário
+                      Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          image: new DecorationImage(
-                              fit: BoxFit.fitHeight,
-                              image:
-                                  new AssetImage('res/${guest.imageName}')))),
-                  title: Text(guest.name,
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: Text(guest.points),
-                ));
-          })
-    ]));
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('res/${guest.imageName}'),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10), // Espaço entre imagem e texto
+                      // Nome e pontos
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            guest.name,
+                            style: const TextStyle(
+                              fontFamily: 'Sailors',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              height: 1, // Coloca os textos colados
+                            ),
+                          ),
+                          Text(
+                            guest.points.toString(),
+                            style: TextStyle(
+                              fontFamily: 'Sailors',
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .fontSize,
+                              height: 1, // Coloca os textos colados
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

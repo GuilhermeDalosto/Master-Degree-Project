@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => FeedbackPositionProvider(),
         child: MaterialApp(
-          title: 'Adivinhe Enfermagem',
+          title: 'Acerto',
           theme: ThemeData(
             primarySwatch: Colors.deepOrange,
             visualDensity: VisualDensity.adaptivePlatformDensity,
