@@ -17,7 +17,7 @@ class CategoryButtonsWidget extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: Colors.white,
               child: Transform.scale(
-                  scale: 2.3, child: Image.asset("res/cat1.png")),
+                  scale: 2.3, child: Image.asset("res/babyCard.png")),
             ),
           ),
           GestureDetector(
@@ -27,7 +27,7 @@ class CategoryButtonsWidget extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: Colors.white,
               child: Transform.scale(
-                  scale: 2.3, child: Image.asset("res/cat2.png")),
+                  scale: 2.3, child: Image.asset("res/pregnantCard.png")),
             ),
           ),
           GestureDetector(
@@ -37,37 +37,7 @@ class CategoryButtonsWidget extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: Colors.white,
               child: Transform.scale(
-                  scale: 2.3, child: Image.asset("res/cat3.png")),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              this.callback(3);
-            },
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Transform.scale(
-                  scale: 2.3, child: Image.asset("res/cat4.png")),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              this.callback(4);
-            },
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Transform.scale(
-                  scale: 2.3, child: Image.asset("res/cat5.png")),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              this.callback(5);
-            },
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Transform.scale(
-                  scale: 2.3, child: Image.asset("res/cat6.png")),
+                  scale: 2.3, child: Image.asset("res/elderCard.png")),
             ),
           ),
         ],

@@ -69,18 +69,76 @@ class _TinderPageState extends State<TinderPage> {
 
   @override
   Widget build(context) => Scaffold(
-        appBar: buildAppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(8),
+        extendBodyBehindAppBar: true, // permite que o gradiente vá até o topo
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Transform.scale(
+            scale: 1.3,
+            child: IconButton(
+              icon: const Icon(Icons.house, color: Colors.orange),
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                } else {
+                  SystemNavigator.pop();
+                }
+              },
+            ),
+          ),
+          actions: [
+            Transform.scale(
+              scale: 1.6,
+              child: Row(children: [
+                const Icon(Icons.done_rounded, color: Colors.green),
+                Text("$corretas", style: const TextStyle(color: Colors.green)),
+                const SizedBox(width: 15),
+              ]),
+            )
+          ],
+          leading: Transform.scale(
+            scale: 1.6,
+            child: Row(children: [
+              const SizedBox(width: 15),
+              const Icon(Icons.close, color: Colors.red),
+              Text("$incorretas", style: const TextStyle(color: Colors.red)),
+            ]),
+          ),
+        ),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.teal.shade100,
+                Colors.teal.shade300,
+              ],
+            ),
+          ),
           child: Column(
             children: [
-              cards.isEmpty
-                  ? const Text('No more cards')
-                  : Stack(children: cards.map(buildUser).toList()),
-              const Expanded(child: SizedBox()),
+              const SizedBox(height: kToolbarHeight + 20), // espaço do AppBar
+              // Aqui você pode adicionar as imagens em leque, se quiser
+
+              // Cards do Tinder
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: cards.isEmpty
+                      ? const Center(child: Text('No more cards'))
+                      : Stack(children: cards.map(buildUser).toList()),
+                ),
+              ),
+
+              // Botões de categoria
               CategoryButtonsWidget(
-                  callback: (value) =>
-                      setState(() => this.cards = getCards(value))),
+                callback: (value) =>
+                    setState(() => this.cards = getCards(value)),
+              ),
               const SizedBox(height: 50),
             ],
           ),
