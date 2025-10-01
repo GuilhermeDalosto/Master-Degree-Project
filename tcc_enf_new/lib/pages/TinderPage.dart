@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Model/Card.dart';
-import 'package:just_audio/just_audio.dart';
+// import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import '../pages/TinderComponent/FeedbackPositionProvider.dart';
 import '../pages/TinderComponent/UserCard.dart';
@@ -22,11 +22,11 @@ class _TinderPageState extends State<TinderPage> {
   var incorretas = 0;
 
   // Player de áudio usando just_audio
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  // final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   void dispose() {
-    _audioPlayer.dispose();
+    // _audioPlayer.dispose();
     super.dispose();
   }
 
@@ -58,13 +58,13 @@ class _TinderPageState extends State<TinderPage> {
   }
 
   Future<void> playCorrect() async {
-    await _audioPlayer.setAsset('assets/correct.mp3');
-    _audioPlayer.play();
+    // await _audioPlayer.setAsset('assets/correct.mp3');
+    // _audioPlayer.play();
   }
 
   Future<void> playWrong() async {
-    await _audioPlayer.setAsset('assets/wrong.mp3');
-    _audioPlayer.play();
+    // await _audioPlayer.setAsset('assets/wrong.mp3');
+    // _audioPlayer.play();
   }
 
   @override
