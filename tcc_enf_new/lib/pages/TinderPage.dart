@@ -2,11 +2,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Model/Card.dart';
-// import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import '../pages/TinderComponent/FeedbackPositionProvider.dart';
 import '../pages/TinderComponent/UserCard.dart';
 import '../pages/TinderComponent/CategoryButtons.dart';
+import 'dart:typed_data';
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:html' as html; // só para web
 
 typedef void clickCallback(int position);
 
@@ -21,36 +24,32 @@ class _TinderPageState extends State<TinderPage> {
   var corretas = 0;
   var incorretas = 0;
 
-  // Player de áudio usando just_audio
-  // final AudioPlayer _audioPlayer = AudioPlayer();
-
-  @override
-  void dispose() {
-    // _audioPlayer.dispose();
-    super.dispose();
-  }
-
   static List<CardGame> getCards(int position) {
     List<CardGame> list = [];
+
+    // Nomes das categorias
     const names = [
-      "Abdominal",
-      "Cabeça",
-      "Sistema Cardíaco",
-      "Locomotor e Pele",
-      "Sistema Respiratório",
-      "Sistema Neurológico"
-    ];
-    const images = [
-      "abdomen",
-      "cabeca",
-      "cardiaco",
-      "pele",
-      "respiratorio",
-      "neuro"
+      "Saúde da criança",
+      "Saúde da mulher",
+      "Saúde do adulto é idoso",
     ];
 
-    for (int i = 1; i <= 10; i++) {
-      list.add(CardGame(name: names[position], image: "${images[position]}$i"));
+    // Intervalos de números para cada categoria
+    const intervals = [
+      [80, 159], // Saúde da crianca
+      [1, 79], // Saúde da mulher
+      [160, 243], // Saúde do adulto é idoso
+    ];
+
+    // Pega o intervalo da categoria selecionada
+    final start = intervals[position][0];
+    final end = intervals[position][1];
+
+    for (int i = start; i <= end; i++) {
+      list.add(CardGame(
+        name: names[position],
+        image: "${i}", // concatena o nome com o número do asset
+      ));
     }
 
     list.shuffle();
@@ -58,13 +57,29 @@ class _TinderPageState extends State<TinderPage> {
   }
 
   Future<void> playCorrect() async {
-    // await _audioPlayer.setAsset('assets/correct.mp3');
-    // _audioPlayer.play();
+    if (kIsWeb) {
+      // Flutter Web
+      final bytes = await rootBundle.load('assets/correct.mp3');
+      final blob = html.Blob([bytes.buffer.asUint8List()]);
+      final url = html.Url.createObjectUrlFromBlob(blob);
+      final audio = html.AudioElement()..src = url;
+      audio.play();
+    } else {
+      // Flutter Mobile - toque rápido usando SystemSound (curto)
+      SystemSound.play(SystemSoundType.click);
+    }
   }
 
   Future<void> playWrong() async {
-    // await _audioPlayer.setAsset('assets/wrong.mp3');
-    // _audioPlayer.play();
+    if (kIsWeb) {
+      final bytes = await rootBundle.load('assets/wrong.mp3');
+      final blob = html.Blob([bytes.buffer.asUint8List()]);
+      final url = html.Url.createObjectUrlFromBlob(blob);
+      final audio = html.AudioElement()..src = url;
+      audio.play();
+    } else {
+      SystemSound.play(SystemSoundType.click);
+    }
   }
 
   @override
@@ -131,7 +146,7 @@ class _TinderPageState extends State<TinderPage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: cards.isEmpty
-                      ? const Center(child: Text('No more cards'))
+                      ? const Center(child: Text('Acabou as cartas!'))
                       : Stack(children: cards.map(buildUser).toList()),
                 ),
               ),
