@@ -18,7 +18,7 @@ class TabBarPage extends StatefulWidget {
 
 class TabBarController extends State<TabBarPage> with TickerProviderStateMixin {
   final List<BarTab> _tabs = [
-    new BarTab(title: "Jogo", color: Colors.teal[100]!),
+    new BarTab(title: "Jogo", color: Color.fromRGBO(177, 227, 236, 1)),
     // new BarTab(title: "Dicas", color: Colors.blue[200]!),
     new BarTab(title: "Ranking", color: Color.fromRGBO(169, 196, 164, 1)),
     new BarTab(title: "Informações", color: Color.fromRGBO(208, 172, 204, 1)),
