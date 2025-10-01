@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 import 'TinderPage.dart';
 
 class MenuGamePage extends StatefulWidget {
@@ -14,69 +14,69 @@ class _GamePageState extends State<MenuGamePage> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background
-          Positioned.fill(
-            child: Image.asset(
-              "res/gameBackground.png",
-              fit: BoxFit.cover,
+          // Background image
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("res/gameBackground.png"),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-
-          // Botões sobrepostos
-          Center(
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                // Primeiro botão (Play)
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TinderPage()),
-                    );
-                  },
-                  child: Image.asset(
-                      "res/playButton.png"), // Mantendo tamanho original
+          // Content layered on top
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 130),
+              InkWell(
+                child: Image.asset(
+                  "res/playButton.png",
+                  width: 300,
                 ),
-
-                // Segundo botão (Rules) 20px abaixo
-                Positioned(
-                  // top: 20, // 20 pixels abaixo do primeiro
-                  child: InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (_) => AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                          content: Builder(
-                            builder: (context) {
-                              var height = MediaQuery.of(context).size.height;
-                              var width = MediaQuery.of(context).size.width;
-
-                              return Container(
-                                height: height,
-                                width: width,
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage("res/ruleBackground.png"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      );
-                    },
-                    child: Image.asset(
-                        "res/rulesButton.png"), // Mantendo tamanho original
-                  ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TinderPage()),
+                  );
+                },
+              ),
+              const SizedBox(height: 30),
+              InkWell(
+                child: Image.asset(
+                  "res/rulesButton.png",
+                  width: 300,
                 ),
-              ],
-            ),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      ),
+                      content: Builder(
+                        builder: (context) {
+                          var height = MediaQuery.of(context).size.height;
+                          var width = MediaQuery.of(context).size.width;
+
+                          return Container(
+                            height: height,
+                            width: width,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("res/ruleBackground.png"),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),
