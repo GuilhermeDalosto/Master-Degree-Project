@@ -146,17 +146,17 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: () {
-                    if ((nameFieldController.text == "admin" ||
-                            nameFieldController.text == "alinefarias" ||
-                            nameFieldController.text == "yuribarbalho" ||
-                            nameFieldController.text == "silvana") &&
-                        passwordFieldController.text == "admin") {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => TabBarPage()),
-                        (Route<dynamic> route) => false,
-                      );
-                    }
+                    // if ((nameFieldController.text == "admin" ||
+                    //         nameFieldController.text == "alinefarias" ||
+                    //         nameFieldController.text == "yuribarbalho" ||
+                    //         nameFieldController.text == "silvana") &&
+                    //     passwordFieldController.text == "admin") {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => TabBarPage()),
+                      (Route<dynamic> route) => false,
+                    );
+                    // }
                   },
                   child: Container(
                     alignment: Alignment.center,
