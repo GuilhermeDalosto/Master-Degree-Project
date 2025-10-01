@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Model/Card.dart';
@@ -6,10 +5,6 @@ import 'package:provider/provider.dart';
 import '../pages/TinderComponent/FeedbackPositionProvider.dart';
 import '../pages/TinderComponent/UserCard.dart';
 import '../pages/TinderComponent/CategoryButtons.dart';
-import 'dart:typed_data';
-import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'dart:html' as html; // só para web
 
 typedef void clickCallback(int position);
 
@@ -57,29 +52,13 @@ class _TinderPageState extends State<TinderPage> {
   }
 
   Future<void> playCorrect() async {
-    if (kIsWeb) {
-      // Flutter Web
-      final bytes = await rootBundle.load('assets/correct.mp3');
-      final blob = html.Blob([bytes.buffer.asUint8List()]);
-      final url = html.Url.createObjectUrlFromBlob(blob);
-      final audio = html.AudioElement()..src = url;
-      audio.play();
-    } else {
-      // Flutter Mobile - toque rápido usando SystemSound (curto)
-      SystemSound.play(SystemSoundType.click);
-    }
+    await SystemSound.play(
+        SystemSoundType.click); // System sound for correct answer
   }
 
   Future<void> playWrong() async {
-    if (kIsWeb) {
-      final bytes = await rootBundle.load('assets/wrong.mp3');
-      final blob = html.Blob([bytes.buffer.asUint8List()]);
-      final url = html.Url.createObjectUrlFromBlob(blob);
-      final audio = html.AudioElement()..src = url;
-      audio.play();
-    } else {
-      SystemSound.play(SystemSoundType.click);
-    }
+    await SystemSound.play(
+        SystemSoundType.alert); // System sound for wrong answer
   }
 
   @override
