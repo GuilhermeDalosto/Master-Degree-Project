@@ -26,14 +26,14 @@ class _TinderPageState extends State<TinderPage> {
     const names = [
       "Saúde da criança",
       "Saúde da mulher",
-      "Saúde do adulto é idoso",
+      "Saúde do adulto e idoso",
     ];
 
     // Intervalos de números para cada categoria
     const intervals = [
-      [80, 159], // Saúde da crianca
+      [160, 243], // Saúde da crianca
       [1, 79], // Saúde da mulher
-      [160, 243], // Saúde do adulto é idoso
+      [80, 159] // Saúde do adulto é idoso
     ];
 
     // Pega o intervalo da categoria selecionada
