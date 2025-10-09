@@ -30,41 +30,14 @@ class _LoginPageState extends State<LoginPage> {
                 height: 180,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.blue.shade50,
-                      Colors.blue.shade200,
-                    ],
-                  ),
                 ),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Image 1 - left (elder)
-                    // Positioned(
-                    //   left: 20,
-                    //   child: Transform.rotate(
-                    //     angle: -0.3, // ~17° counterclockwise
-                    //     child: Image.asset(
-                    //       'res/baby.png',
-                    //       width: 80,
-                    //       height: 80,
-                    //       fit: BoxFit.cover,
-                    //     ),
-                    //   ),
-                    // ),
-                    // Image 2 - center (pregnant)
-                    Positioned(
-                      child: Image.asset(
-                        'res/pregnant.png',
-                        width: 140,
-                        height: 140,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
+                clipBehavior: Clip
+                    .hardEdge, // garante que a imagem fique dentro do círculo
+                child: Image.asset(
+                  'res/appstore.png',
+                  width: 180,
+                  height: 180,
+                  fit: BoxFit.cover,
                 ),
               ),
 
