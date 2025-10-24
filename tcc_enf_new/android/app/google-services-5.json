@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "506655096044",
+    "firebase_url": "https://small-talk-23fad.firebaseio.com",
+    "project_id": "small-talk-23fad",
+    "storage_bucket": "small-talk-23fad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506655096044:android:34b964385c8507829cb9c9",
+        "android_client_info": {
+          "package_name": "com.dalostol.acertoUNB"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqchAMj1-BEbXo0OXpvsQLLZRe9a_sCy8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
